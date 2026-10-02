@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function App() {
   const onFinish =async values => {
@@ -10,12 +12,26 @@ const data = await axios.post("http://localhost:3000/api/v1/authentication/regis
   username: values.username,
   email: values.email,
   password: values.password
-}) 
+},
+{
+  headers:{
+    Authorization: "123456789"
+  }
+}
 
+) 
 
-    console.log(values.username);
-    console.log(values.email);
-    console.log(values.password);
+if(data.data.success == "data sent  successfully"){
+  toast.success("Registration successfully")
+
+} else if(data.data == "Data Already Existed"){
+  toast.error("Data Already Existed")
+}else if(data.data == "valid email"){
+  toast.error("Valid email required")
+
+}
+    console.log(data.data);
+    
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -33,6 +49,8 @@ const data = await axios.post("http://localhost:3000/api/v1/authentication/regis
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+            <Toaster />
+
       <Form.Item
         label="Username"
         name="username"
