@@ -82,7 +82,7 @@ function Registration() {
                   <span className="font-medium text-slate-700">Username</span>
                 }
                 name="username"
-                className="!mb-4"
+                className="mb-4!"
                 rules={[
                   {
                     required: true,
@@ -93,7 +93,7 @@ function Registration() {
                 <Input
                   size="large"
                   placeholder="Enter your username"
-                  className="!rounded-xl"
+                  className="rounded-xl!"
                 />
               </Form.Item>
 
@@ -104,7 +104,7 @@ function Registration() {
                   </span>
                 }
                 name="email"
-                className="!mb-4"
+                className="mb-4!"
                 rules={[
                   {
                     required: true,
@@ -119,7 +119,7 @@ function Registration() {
                 <Input
                   size="large"
                   placeholder="Enter your email"
-                  className="!rounded-xl"
+                  className="rounded-xl!"
                 />
               </Form.Item>
 
@@ -128,7 +128,7 @@ function Registration() {
                   <span className="font-medium text-slate-700">Password</span>
                 }
                 name="password"
-                className="!mb-5"
+                className="mb-5!"
                 rules={[
                   {
                     required: true,
@@ -143,11 +143,11 @@ function Registration() {
                 <Input.Password
                   size="large"
                   placeholder="Enter your password"
-                  className="!rounded-xl"
+                  className="rounded-xl!"
                 />
               </Form.Item>
 
-              <Form.Item className="!mb-4">
+              <Form.Item className="mb-4!">
                 <Button
                   type="primary"
                   htmlType="submit"
