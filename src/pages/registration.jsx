@@ -2,9 +2,11 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 function Registration() {
+
+  const [form] = Form.useForm();
   const onFinish = async (values) => {
     const data = await axios.post(
       "http://localhost:3000/api/v1/authentication/registration",
@@ -22,6 +24,12 @@ function Registration() {
 
     if (data.data.success == "data sent successfully") {
       toast.success("Registration successfully");
+     form.resetFields();
+   
+    //  nevigate("/otpverification")
+   
+    
+
     } else if (data.data == "Data Already Existed") {
       toast.error("Data Already Existed");
     } else if (data.data == "valid email") {
@@ -68,6 +76,7 @@ function Registration() {
             </div>
 
             <Form
+            form={form}
               name="registration"
               layout="vertical"
               initialValues={{ remember: true }}
@@ -75,7 +84,7 @@ function Registration() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <Toaster position="top-right" />
+              <Toaster position="top-center" />
 
               <Form.Item
                 label={
