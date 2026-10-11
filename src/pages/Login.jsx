@@ -63,7 +63,7 @@ function Login() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <Toaster position="top-right" />
+          
 
               <Form.Item
                 label={
@@ -156,6 +156,7 @@ function Login() {
           </div>
         </div>
       </div>
+          <Toaster position="top-center" />
     </div>
   );
 }

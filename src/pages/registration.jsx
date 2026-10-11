@@ -2,9 +2,12 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+
 
 function Registration() {
+
+  let navigate = useNavigate()
 
   const [form] = Form.useForm();
   const onFinish = async (values) => {
@@ -26,7 +29,10 @@ function Registration() {
       toast.success("Registration successfully");
      form.resetFields();
    
-    //  nevigate("/otpverification")
+    setInterval(() => {
+       navigate(`/otpverification/${data.data.email}`)
+      
+    }, 2000);
    
     
 
@@ -84,7 +90,7 @@ function Registration() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <Toaster position="top-center" />
+             
 
               <Form.Item
                 label={
@@ -182,6 +188,7 @@ function Registration() {
           </div>
         </div>
       </div>
+       <Toaster position="top-center" />
     </div>
   );
 }
