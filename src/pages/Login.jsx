@@ -16,11 +16,14 @@ function Login() {
       },
     );
 
-    if (data.data.success === "Login successfully") {
+    if (data.data.success == "Login successfully") {
       toast.success("Login successfully");
       navigate("/home");
-    } else if (data.data.error === "Invalid Creandiential") {
+    } else if (data.data.error == "Invalid Creandiential") {
       toast.error("Invalid Creandiential");
+    }else if( data.data.error == "Email verification failed"){
+      toast.error("Email verification failed");
+     
     }
 
     console.log(data.data);

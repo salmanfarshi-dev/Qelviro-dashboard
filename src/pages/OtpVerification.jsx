@@ -2,18 +2,20 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
 function OtpVerification() {
+
+  const param = useParams()
   const nevigate = useNavigate();
   const [form] = Form.useForm();
   const onFinish = async (values) => {
     const data = await axios.post(
-      "http://localhost:3000/api/v1/authentication/registration",
+      "http://localhost:3000/api/v1/authentication/otp",
       {
-        username: values.username,
-        email: values.email,
-        password: values.password,
+       
+        email: param.email,
+        otp: values.otp,
       },
       {
         headers: {
@@ -22,14 +24,14 @@ function OtpVerification() {
       },
     );
 
-    if (data.data.success == "data sent successfully") {
-      toast.success("Registration successfully");
+    if (data.data.success == "OTP Match") {
+      toast.success("Verification successfully");
       form.resetFields();
-      nevigate("/otpverification");
-    } else if (data.data == "Data Already Existed") {
-      toast.error("Data Already Existed");
-    } else if (data.data == "valid email") {
-      toast.error("Valid email required");
+      nevigate("/login");
+    } else if (data.data.error == "OTP Not Match") {
+      toast.error("OTP Not Match");
+    } else if (data.data.error == "Invalid Creandiential") {
+      toast.error("Invalid Creandiential");
     }
 
     console.log(data.data);
@@ -41,6 +43,7 @@ function OtpVerification() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
+
       <img
         src="/images.jpg"
         alt=""
@@ -61,7 +64,7 @@ function OtpVerification() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <Toaster position="top-center" />
+            
 
               <Form.Item
                 label={<span className="font-medium text-slate-700">OTP</span>}
@@ -83,7 +86,7 @@ function OtpVerification() {
 
               <Form.Item className="mb-4! ">
                 <div className="flex items-center gap-3 md:gap-6 justify-center">
-                  <Button type="primary">Send</Button>
+                  <Button type="primary" htmlType="submit">Send</Button>
                  <Link to="/">
                   <Button color="danger" variant="outlined">
                     Cencel
@@ -95,6 +98,7 @@ function OtpVerification() {
           </div>
         </div>
       </div>
+        <Toaster position="top-center" />
     </div>
   );
 }
