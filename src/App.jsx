@@ -10,6 +10,8 @@ import {
 } from "react-router";
 import Home from "./pages/Home";
 import OtpVerification from "./pages/OtpVerification";
+import ForgetPassword from "./pages/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +20,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />}></Route>
       <Route path="/home" element={<Home />}></Route>
       <Route path="/otpverification/:email" element={<OtpVerification />}></Route>
+       <Route path="/forgetpassword" element={<ForgetPassword/> }></Route>
+       <Route path="/resetpassword/:email" element={ <ResetPassword/> }></Route>
     </>,
   ),
 );

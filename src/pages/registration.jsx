@@ -4,45 +4,49 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 
-
 function Registration() {
-
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   const [form] = Form.useForm();
+
   const onFinish = async (values) => {
-    const data = await axios.post(
-      "http://localhost:3000/api/v1/authentication/registration",
-      {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-      },
-      {
-        headers: {
-          Authorization: "123456789",
+    try {
+      const data = await axios.post(
+        "http://localhost:3000/api/v1/authentication/registration",
+        {
+          username: values.username,
+          email: values.email,
+          password: values.password,
         },
-      },
-    );
+        {
+          headers: {
+            Authorization: "123456789",
+          },
+        },
+      );
 
-    if (data.data.success == "data sent successfully") {
-      toast.success("Registration successfully");
-     form.resetFields();
-   
-    setInterval(() => {
-       navigate(`/otpverification/${data.data.email}`)
-      
-    }, 2000);
-   
-    
+      if (data.data.success === "data sent successfully") {
+        toast.success("Registration successful!");
+        form.resetFields();
 
-    } else if (data.data == "Data Already Existed") {
-      toast.error("Data Already Existed");
-    } else if (data.data == "valid email") {
-      toast.error("Valid email required");
+        setTimeout(() => {
+          navigate(`/otpverification/${encodeURIComponent(data.data.email)}`);
+        }, 2000);
+      } else if (data.data === "Data Already Existed") {
+        toast.error("Data Already Existed");
+      } else if (data.data === "valid email") {
+        toast.error("Valid email required");
+      } else {
+        toast.error(
+          typeof data.data === "string" ? data.data : "Registration failed",
+        );
+      }
+
+      console.log(data.data);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+      console.log(error);
     }
-
-    console.log(data.data);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -82,7 +86,7 @@ function Registration() {
             </div>
 
             <Form
-            form={form}
+              form={form}
               name="registration"
               layout="vertical"
               initialValues={{ remember: true }}
@@ -90,8 +94,6 @@ function Registration() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-             
-
               <Form.Item
                 label={
                   <span className="font-medium text-slate-700">Username</span>
@@ -188,7 +190,7 @@ function Registration() {
           </div>
         </div>
       </div>
-       <Toaster position="top-center" />
+      <Toaster position="top-center" />
     </div>
   );
 }

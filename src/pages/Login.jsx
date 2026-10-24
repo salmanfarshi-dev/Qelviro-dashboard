@@ -21,9 +21,8 @@ function Login() {
       navigate("/home");
     } else if (data.data.error == "Invalid Creandiential") {
       toast.error("Invalid Creandiential");
-    }else if( data.data.error == "Email verification failed"){
+    } else if (data.data.error == "Email verification failed") {
       toast.error("Email verification failed");
-     
     }
 
     console.log(data.data);
@@ -66,8 +65,6 @@ function Login() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-          
-
               <Form.Item
                 label={
                   <span className="font-medium text-slate-700">
@@ -114,6 +111,15 @@ function Login() {
                 />
               </Form.Item>
 
+              <div className="mb-5 -mt-2 flex justify-end">
+                <Link
+                  to="/forgetpassword"
+                  className="text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-800"
+                >
+                  Forgot Password?
+                </Link>
+              </div>
+
               <Form.Item className="mb-4!">
                 <Button
                   type="primary"
@@ -159,7 +165,7 @@ function Login() {
           </div>
         </div>
       </div>
-          <Toaster position="top-center" />
+      <Toaster position="top-center" />
     </div>
   );
 }
