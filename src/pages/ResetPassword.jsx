@@ -30,7 +30,7 @@ function ResetPassword() {
         toast.success("Password reset successfully!");
 
         setTimeout(() => {
-          navigate("/home");
+          navigate("/login");
         }, 1000);
       } else {
         toast.error(response.data.error || "Password reset failed");
