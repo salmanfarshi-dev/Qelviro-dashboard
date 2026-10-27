@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { activeuserinfo } from "../slices/UserinfoSlies";
+import { useSelector } from "react-redux";
 
 function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  let data = useSelector((state) => state.userinfo.value);
 
   const onFinish = async (values) => {
     const data = await axios.post(
@@ -23,9 +25,7 @@ function Login() {
       toast.success("Login successfully");
       navigate("/home");
 
-      dispatch(activeuserinfo(JSON.stringify(data.data)))
-
-
+      dispatch(activeuserinfo(JSON.stringify(data.data)));
     } else if (data.data.error == "Invalid Creandiential") {
       toast.error("Invalid Creandiential");
     } else if (data.data.error == "Email verification failed") {
