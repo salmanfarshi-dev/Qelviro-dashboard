@@ -1,37 +1,27 @@
-import React, { useEffect } from "react";
+
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { logout } from "../slices/UserinfoSlies";
-import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
 
 function Home() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  let data = useSelector((state) => state.userinfo.value);
+  const data = useSelector((state) => state.userinfo.value);
 
-   let handlelogout = () => {
-    dispatch(logout(JSON.stringify(data.data)));
-    navigate("/login")
-  };
-
-
-  useEffect(() => {
-    if (data == null) {
-      navigate("/login");
-    }
-  }, []);
- 
+  if (!data) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
-    <div className="flex justify-end mr-10 mt-10">
-      <div className="flex flex-col justify-center items-center gap-3 border border-black p-2 rounded shadow-2xl w-100 h-80">
-        <div className="w-20 h-20 rounded-full bg-red-300"></div>
-        <h5>Name: Salman farshi</h5>
-        <h5>Email: sfarshi222@gmail.com</h5>
-        <h4 onClick={handlelogout} className="text-xl font-bold cursor-pointer">
-          Logout
-        </h4>
-      </div>
+    <div className="min-h-dvh w-full bg-slate-100 md:flex">
+      <Sidebar />
+
+      <main className="min-h-0 min-w-0 flex-1">
+        <div className="w-full min-w-0 p-3 sm:p-5 lg:p-8">
+          <div className="min-h-[calc(100dvh-6rem)] min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 lg:p-8">
+            <Outlet />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

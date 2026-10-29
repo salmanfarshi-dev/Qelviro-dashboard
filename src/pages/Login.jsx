@@ -23,7 +23,7 @@ function Login() {
 
     if (data.data.success == "Login successfully") {
       toast.success("Login successfully");
-      navigate("/home");
+      navigate("/dashboard");
 
       dispatch(activeuserinfo(JSON.stringify(data.data)));
     } else if (data.data.error == "Invalid Creandiential") {

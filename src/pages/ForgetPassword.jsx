@@ -54,21 +54,21 @@ function ForgetPassword() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
+    
       <img
         src="/images.jpg"
         alt=""
         className="absolute inset-0 h-full w-full scale-105 object-cover blur-sm"
       />
 
-      {/* Background Overlay */}
+     
       <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* Main Card */}
+     
       <div className="relative z-10 flex min-h-screen w-full items-center justify-center px-4 py-8">
         <div className="flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-white/95 p-5 shadow-2xl backdrop-blur-md md:flex-row md:p-8 lg:p-10">
 
-          {/* Left Image */}
+          
           <div className="hidden w-1/2 items-center justify-center md:flex">
             <img
               src="/registration.png"
