@@ -22,24 +22,7 @@ const items = [
     label: "Dashboard",
     icon: <MdDashboard />,
   },
-  {
-    key: "sub1",
-    label: "Products",
-    icon: <AiFillProduct />,
-    children: [
-      { key: "/dashboard/addproduct", label: "Add Product" },
-      { key: "/dashboard/viewproduct", label: "View Products" },
-    ],
-  },
-  {
-    key: "sub2",
-    label: "Variants",
-    icon: <SettingOutlined />,
-    children: [
-      { key: "/dashboard/createvarient", label: "Create Variant" },
-      { key: "/dashboard/viewvarient", label: "View Variants" },
-    ],
-  },
+
   {
     key: "sub3",
     label: "Categories",
@@ -64,6 +47,25 @@ const items = [
       },
     ],
   },
+  {
+    key: "sub1",
+    label: "Products",
+    icon: <AiFillProduct />,
+    children: [
+      { key: "/dashboard/addproduct", label: "Add Product" },
+      { key: "/dashboard/viewproduct", label: "View Products" },
+    ],
+  },
+  {
+    key: "sub2",
+    label: "Variants",
+    icon: <SettingOutlined />,
+    children: [
+      { key: "/dashboard/createvarient", label: "Create Variant" },
+      { key: "/dashboard/viewvarient", label: "View Variants" },
+    ],
+  },
+
   {
     key: "sub5",
     label: "Discounts",
@@ -293,11 +295,11 @@ function Sidebar() {
 
           <div className="min-w-0 flex-1">
             <h3 className="truncate text-sm font-bold text-white">
-              {userName}
+              {data.username}
             </h3>
 
             <p className="mt-1 truncate text-[11px] text-slate-400">
-              {userEmail || "Logged-in User"}
+              {data.email || "Logged-in User"}
             </p>
 
             <div className="mt-1.5 flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400">
