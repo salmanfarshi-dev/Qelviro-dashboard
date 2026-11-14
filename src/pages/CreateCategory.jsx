@@ -3,18 +3,23 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Button, Form, Input } from "antd";
 import { FiTag, FiPlus } from "react-icons/fi";
+import { useSelector} from "react-redux"
 
 function CreateCategory() {
+
+const userinfo = useSelector(state => state.userinfo.value);
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     const categoryname = values.categoryname.trim();
+    const categoryownerid= userinfo.id
 
     try {
       const data = await axios.post(
         "http://localhost:3000/api/v1/product/createcategory",
         {
           categoryname,
+          categoryownerid
         },
       );
 
